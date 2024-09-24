@@ -57,5 +57,5 @@ jobs:
     - name: Run Docker Image
       run: |
         echo "Running Docker image..."
-        docker run --rm musicapi:latest  # Run the Docker image to verify it works
+        docker run --rm fatima/musicapi  # Run the Docker image to verify it works
 
