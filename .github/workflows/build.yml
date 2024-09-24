@@ -1,10 +1,38 @@
-name: Build Docker Image 
- 
+name: Build Docker Image
+
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - master
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Setup .NET
+#         uses: actions/setup-dotnet@v3
+#         with:
+#           dotnet-version: '8.0.x'
+
+#       - name: Restore dependencies
+#         run: dotnet restore ./MusicApi/MusicApi.csproj
+
+#       - name: Build Docker Image
+#         run: |
+#           echo "Building Docker image..."
+#           docker build -t mymusicapi:latest -f MusicApi/Dockerfile .  # Specify the path to the Dockerfile
+
+#       - name: Run Docker Image
+#         run: |
+#           echo "Running Docker image..."
+#           docker run --rm mymusicapi:latest  # Run the Docker image to verify it works
  
 jobs:
   hello-world-job:
@@ -30,3 +58,4 @@ jobs:
       run: |
         echo "Running Docker image..."
         docker run --rm musicapi:latest  # Run the Docker image to verify it works
+
