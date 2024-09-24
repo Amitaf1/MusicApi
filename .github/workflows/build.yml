@@ -16,14 +16,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore ./MusicApi/MusicApi.csproj
 
       - name: Build Docker Image
         run: |
           echo "Building Docker image..."
-          docker build -t mymusicapi:latest .  # Build the Docker image with the tag 'mymusicapi:latest'
-      
+          docker build -t mymusicapi:latest -f MusicApi/Dockerfile .  # Specify the path to the Dockerfile
+
       - name: Run Docker Image
         run: |
           echo "Running Docker image..."
