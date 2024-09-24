@@ -1,12 +1,12 @@
-name: Hello World Build Pipeline
+name: Build Docker Image
 
 on:
   push:
     branches:
-      - master 
+      - master
   pull_request:
     branches:
-      - master 
+      - master
 
 jobs:
   build:
@@ -14,13 +14,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3 
+        uses: actions/checkout@v3
 
-      - name: Run Hello World
-        run: echo "Hello, World! The build pipeline has been triggered."  # This prints "Hello, World!"
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-      - name: Build Project
+      - name: Build Docker Image
         run: |
-          echo "Building the project..."  # Simulate a build step
-          # You can replace this with an actual build command if needed
-          echo "Build complete!"  # Indicate the build step is complete
+          echo "Building Docker image..."
+          docker build -t mymusicapi:latest .  # Build the Docker image with the tag 'mymusicapi:latest'
+      
+      - name: Run Docker Image
+        run: |
+          echo "Running Docker image..."
+          docker run --rm mymusicapi:latest  # Run the Docker image to verify it works
