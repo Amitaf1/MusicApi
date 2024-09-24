@@ -1,33 +1,26 @@
 name: Hello World Build Pipeline
 
-# Trigger the pipeline on any push to the repository (on any branch)
 on:
   push:
     branches:
-      - master  # Change to 'main' if your default branch is 'main'
+      - master 
   pull_request:
     branches:
-      - master
+      - master 
 
-# Define the jobs that will run
 jobs:
   build:
-    # The environment where the job will run
     runs-on: ubuntu-latest
 
-    # Steps that will be executed in this job
     steps:
-      # Checkout the latest code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 
 
-      # Run a "Hello World" script
       - name: Run Hello World
-        run: echo "Hello, World! The build pipeline has been triggered."
+        run: echo "Hello, World! The build pipeline has been triggered."  # This prints "Hello, World!"
 
-      # Example: Run a basic build script (replace with your actual build command)
       - name: Build Project
         run: |
-          echo "Building the project..."
-          # You can replace this with an actual build command like `dotnet build` or `npm run build`
-          echo "Build complete!"
+          echo "Building the project..."  # Simulate a build step
+          # You can replace this with an actual build command if needed
+          echo "Build complete!"  # Indicate the build step is complete
