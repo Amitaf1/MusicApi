@@ -23,23 +23,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      - name: Log into Azure Container Registry
+
+      - name: Log into Azure Registry
         run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
-        
-      - name: Unique tag for verion
+
+      - name: Version tag setup
         id: vars
         run: |
-          echo "TAG=$(date +'%Y%m%d%H%M')-${{ github.sha }}" >> $GITHUB_ENV  # PS. Use a combo of date+commit SHA for a unique tag
+          echo "TAG=$(date +'%Y%m%d%H%M')-${{ github.sha }}" >> $GITHUB_ENV  # Use date+commit SHA for a unique tag
 
-      - name: Build Docker image
-        run: docker build -t fatima/musicapi:4.0 ./MusicApi
- 
+      - name: Building Docker image
+        run: docker build -t fatima/musicapi:${{ env.TAG }} ./MusicApi
+
       - name: Tag Docker image
-        run: docker tag fatima/musicapi:4.0 ${{ secrets.REGISTRY_URL }}/fatima/musicapi:4.0
+        run: docker tag fatima/musicapi:${{ env.TAG }} ${{ secrets.REGISTRY_URL }}/fatima/musicapi:${{ env.TAG }}
 
       - name: Push Docker image
-        run: docker push ${{ secrets.REGISTRY_URL }}/fatima/musicapi:4.0
-
-      - name: List images
-        run: az acr repository list --name ${{ secrets.REGISTRY_NAME }} --output table
+        run: docker push ${{ secrets.REGISTRY_URL }}/fatima/musicapi:${{ env.TAG }}
