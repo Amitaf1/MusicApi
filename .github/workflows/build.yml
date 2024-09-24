@@ -58,7 +58,7 @@ jobs:
         run: docker build -t fatima/musicapi:4.0 ./MusicApi
  
       - name: Tag Docker image
-        run: docker tag fatima/musicapi ${{ secrets.REGISTRY_URL }}/fatima/musicapi:4.0
+        run: docker tag fatima/musicapi:4.0 ${{ secrets.REGISTRY_URL }}/fatima/musicapi:4.0
 
       - name: Push Docker image
         run: docker push ${{ secrets.REGISTRY_URL }}/fatima/musicapi:4.0
