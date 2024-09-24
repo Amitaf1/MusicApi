@@ -54,8 +54,7 @@ jobs:
     #     echo "Building Docker image..."          
     #     docker build -t mymusicapi:latest -f MusicApi/Dockerfile ./MusicApi  # Specify the path to the Dockerfile and context
 
-    - name: Run Docker Image
-      run: |
-        echo "Running Docker image..."
-        docker run --rm fatima/musicapi  # Run the Docker image to verify it works
-
+    # - name: Run Docker Image
+    #   run: |
+    #     echo "Running Docker image..."
+    #     docker run --rm fatima/musicapi 
