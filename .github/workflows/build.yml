@@ -40,3 +40,6 @@ jobs:
 
       - name: Push Docker image
         run: docker push ${{ secrets.REGISTRY_URL }}/fatima/musicapi:${{ env.TAG }}
+      
+      - name: Run tests
+        run: dotnet test ./MusicApi.Tests/MusicApi.Tests.csproj --no-build --verbosity normal
