@@ -33,18 +33,41 @@ on:
 #         run: |
 #           echo "Running Docker image..."
 #           docker run --rm mymusicapi:latest  # Run the Docker image to verify it works
- 
+
+
 jobs:
   hello-world-job:
     runs-on: ubuntu-latest
- 
+
     steps:
-    - name: Print Hello World
-      run: echo "Hello, World!"
+      - name: Print Hello World
+        run: echo "Hello, World!"
+
+  docker-job:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Build Docker image
+        run: docker build -t fatima/musicapi ./MusicApi
  
-    - uses: actions/checkout@v4
-    - name: Build Docker image
-      run:  docker build ./MusicApi -t fatima/musicapi
+
+
+# jobs:
+#   hello-world-job:
+#     runs-on: ubuntu-latest
+ 
+#     steps:
+#     - name: Print Hello World
+#       run: echo "Hello, World!"
+ 
+#     - name: Checkout code
+#       uses: actions/checkout@v4
+        
+#     - name: Build Docker image
+#       run: docker build -t fatima/musicapi ./MusicApi 
  
     # - name: Checkout code
     #   uses: actions/checkout@v3  # This step checks out your repository's code
